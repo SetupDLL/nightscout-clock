@@ -134,9 +134,11 @@ float DisplayManager_::getTextWidth(const char* text, byte textCase) {
 }
 void DisplayManager_::setTextColor(uint16_t color) { matrix->setTextColor(color); }
 
-void DisplayManager_::clearMatrix() {
+void DisplayManager_::clearMatrix(bool updateMatrix) {
     matrix->clear();
-    matrix->show();
+    if (updateMatrix) {
+        matrix->show();
+    }
 }
 
 // DisplayManager_::printText(int16_t x, int16_t y, const char *text, TEXT_ALIGNMENT alignment, byte
