@@ -92,11 +92,11 @@ void BGDisplayManager_::maybeRrefreshScreen(bool force) {
             if (displayedReadings.size() > 0) {
                 bool dataIsOld = displayedReadings.back().getSecondsAgo() >
                                  60 * SettingsManager.settings.bg_data_too_old_threshold_minutes;
-                DisplayManager.clearMatrix();
+                DisplayManager.clearMatrix(false);
                 currentFace->showReadings(displayedReadings, dataIsOld);
                 DisplayManager.update();
             } else {
-                DisplayManager.clearMatrix();
+                DisplayManager.clearMatrix(false);
                 currentFace->showNoData();
                 DisplayManager.update();
             }

@@ -50,7 +50,6 @@ void BGDisplayFaceClock::showClock() const {
 }
 
 void BGDisplayFaceClock::showNoData() const {
-    DisplayManager.clearMatrix();
     showClock();
 
     String noData = "---";
