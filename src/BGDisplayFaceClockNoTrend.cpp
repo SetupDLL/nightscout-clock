@@ -8,7 +8,7 @@ void BGDisplayFaceClockNoTrend::showReadings(
     const std::list<GlucoseReading>& readings, bool dataIsOld) const {
     showClock();
 
-    showReading(readings.back(), 32, 6, TEXT_ALIGNMENT::RIGHT, FONT_TYPE::MEDIUM, dataIsOld);
+    showReading(readings.back(), 33, 6, TEXT_ALIGNMENT::RIGHT, FONT_TYPE::MEDIUM, dataIsOld);
 
     switch (SettingsManager.settings.time_format) {
         case TIME_FORMAT::HOURS_12:
@@ -53,5 +53,5 @@ void BGDisplayFaceClockNoTrend::showNoData() const {
     }
 
     DisplayManager.setTextColor(BG_COLOR_OLD);
-    DisplayManager.printText(32, 6, noData.c_str(), TEXT_ALIGNMENT::RIGHT, 2);
+    DisplayManager.printText(33, 6, noData.c_str(), TEXT_ALIGNMENT::RIGHT, 2);
 }
