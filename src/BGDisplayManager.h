@@ -10,6 +10,7 @@
 #include "BGDisplayFace.h"
 #include "BGDisplayFaceBigText.h"
 #include "BGDisplayFaceClock.h"
+#include "BGDisplayFaceClockNoTrend.h"
 #include "BGDisplayFaceGraph.h"
 #include "BGDisplayFaceGraphAndBG.h"
 #include "BGDisplayFaceSimple.h"
