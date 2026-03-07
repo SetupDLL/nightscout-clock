@@ -112,8 +112,10 @@ void BGDisplayManager_::showData(std::list<GlucoseReading> glucoseReadings) {
         return;
     }
 
-    DisplayManager.clearMatrix();
+    // Do not push a blank frame before re-drawing to avoid visible flicker.
+    DisplayManager.clearMatrix(false);
     currentFace->showReadings(glucoseReadings);
+    DisplayManager.update();
 
     displayedReadings = glucoseReadings;
 }
