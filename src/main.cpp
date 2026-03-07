@@ -15,7 +15,8 @@ float apModeHintPosition = MATRIX_WIDTH;  // Start the scrolling right after the
 
 void setup() {
     pinMode(15, OUTPUT);
-    digitalWrite(15, LOW);
+    // Buzzer is active-low on pin 15, keep it silent during boot/initialization.
+    digitalWrite(15, HIGH);
     delay(2000);
     Serial.begin(115200);
     // Serial.setDebugOutput(true);
