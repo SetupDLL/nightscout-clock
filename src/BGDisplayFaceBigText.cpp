@@ -5,9 +5,6 @@
 
 void BGDisplayFaceBigText::showReadings(
     const std::list<GlucoseReading>& readings, bool dataIsOld) const {
-    showReading(readings.back(), 0, 7, TEXT_ALIGNMENT::LEFT, FONT_TYPE::LARGE, dataIsOld);
-
-    // show arrow in the right part of the screen
-    showTrendArrow(readings.back(), MATRIX_WIDTH - 5, 1, dataIsOld);
+    showReading(readings.back(), MATRIX_WIDTH, 7, TEXT_ALIGNMENT::RIGHT, FONT_TYPE::LARGE, dataIsOld);
     DisplayManager.update();
 }
