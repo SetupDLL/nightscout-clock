@@ -1,5 +1,7 @@
 #include "BGSource.h"
 
+#include <WiFi.h>
+
 #include "ServerManager.h"
 
 unsigned long lastCallAttemptMills = 0;
@@ -13,7 +15,7 @@ void BGSource::setup() {
 
 void BGSource::handleFailedAttempt() {
     ServerManager.failedAttempts++;
-    if (ServerManager.failedAttempts >= 10) {
+    if (WiFi.status() != WL_CONNECTED && ServerManager.failedAttempts >= 10) {
         ServerManager.reconnectWifi();
     }
 }
