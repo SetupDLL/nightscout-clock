@@ -15,7 +15,7 @@ void BGSource::setup() {
 
 void BGSource::handleFailedAttempt() {
     ServerManager.failedAttempts++;
-    if (WiFi.status() != WL_CONNECTED && ServerManager.failedAttempts >= 10) {
+    if (ServerManager.failedAttempts >= 10) {
         ServerManager.reconnectWifi();
     }
 }
