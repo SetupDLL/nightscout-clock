@@ -51,12 +51,4 @@ void BGDisplayFaceClock::showClock() const {
 
 void BGDisplayFaceClock::showNoData() const {
     showClock();
-
-    String noData = "---";
-    if (SettingsManager.settings.bg_units == BG_UNIT::MMOLL) {
-        noData = "--.-";
-    }
-
-    DisplayManager.setTextColor(BG_COLOR_OLD);
-    DisplayManager.printText(33, 6, noData.c_str(), TEXT_ALIGNMENT::RIGHT, 2);
 }
