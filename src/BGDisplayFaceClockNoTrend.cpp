@@ -37,11 +37,17 @@ void BGDisplayFaceClockNoTrend::showClock() const {
         }
     }
 
-    char timeText[6];
-    snprintf(timeText, sizeof(timeText), "%02d:%02d", timeinfo.tm_hour, timeinfo.tm_min);
+    char hour[3], minute[3];
+    snprintf(hour, sizeof(hour), "%02d", timeinfo.tm_hour);
+    snprintf(minute, sizeof(minute), "%02d", timeinfo.tm_min);
 
     DisplayManager.setTextColor(COLOR_WHITE);
-    DisplayManager.printText(0, 6, timeText, TEXT_ALIGNMENT::LEFT, 2);
+    DisplayManager.printText(0, 6, hour, TEXT_ALIGNMENT::LEFT, 2);
+    DisplayManager.printText(9, 6, minute, TEXT_ALIGNMENT::LEFT, 2);
+
+    // Custom colon so the lower dot sits on the same bottom edge as the digits (LaMetric style).
+    DisplayManager.drawPixel(7, 2, COLOR_WHITE, false);
+    DisplayManager.drawPixel(7, 6, COLOR_WHITE, false);
 }
 
 void BGDisplayFaceClockNoTrend::showNoData() const {
