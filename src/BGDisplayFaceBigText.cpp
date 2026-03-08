@@ -6,13 +6,11 @@
 void BGDisplayFaceBigText::showReadings(
     const std::list<GlucoseReading>& readings, bool dataIsOld) const {
     auto lastReading = readings.back();
-    constexpr int TREND_ARROW_WIDTH = 5;
-    constexpr int READING_RIGHT_PADDING = TREND_ARROW_WIDTH + 1;
+    constexpr int READING_LEFT_PADDING = 0;
+    constexpr int TREND_ARROW_X = MATRIX_WIDTH - 5;
 
-    showReading(
-        lastReading, MATRIX_WIDTH - READING_RIGHT_PADDING, 7, TEXT_ALIGNMENT::RIGHT, FONT_TYPE::LARGE,
-        dataIsOld);
-    showTrendArrow(lastReading, MATRIX_WIDTH - 5, 1, dataIsOld);
+    showReading(lastReading, READING_LEFT_PADDING, 7, TEXT_ALIGNMENT::LEFT, FONT_TYPE::LARGE, dataIsOld);
+    showTrendArrow(lastReading, TREND_ARROW_X, 1, dataIsOld);
 
     DisplayManager.update();
 }
