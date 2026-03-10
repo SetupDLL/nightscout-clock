@@ -8,9 +8,9 @@
 namespace {
 
 bool isNetworkFailureResponseCode(int responseCode) {
-    return responseCode <= 0 || responseCode == HTTP_CODE_UNAUTHORIZED ||
-           responseCode == HTTP_CODE_FORBIDDEN || responseCode == HTTP_CODE_TOO_MANY_REQUESTS ||
-           responseCode >= 500;
+    // HTTP status codes mean we reached LibreLinkUp backend through WiFi,
+    // so reconnecting WiFi will not fix these responses.
+    return responseCode <= 0;
 }
 
 }

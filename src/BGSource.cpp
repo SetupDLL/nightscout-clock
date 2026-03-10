@@ -14,6 +14,13 @@ void BGSource::setup() {
 }
 
 void BGSource::handleFailedAttempt() {
+    if (WiFi.status() == WL_CONNECTED) {
+        // Do not trigger WiFi reconnect/AP fallback when transport is healthy and
+        // the upstream API temporarily returns no data/errors.
+        ServerManager.failedAttempts = 0;
+        return;
+    }
+
     ServerManager.failedAttempts++;
     if (ServerManager.failedAttempts >= 10) {
         ServerManager.reconnectWifi();
