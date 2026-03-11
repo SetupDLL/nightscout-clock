@@ -23,6 +23,10 @@ void BGSource::handleFailedAttempt() {
 
     ServerManager.failedAttempts++;
     if (ServerManager.failedAttempts >= 10) {
+        // Ensure any pending HTTP/TLS state is released before reconnecting WiFi.
+        // This helps avoid SSL allocation failures after repeated retries.
+        client->end();
+        wifiSecureClient->stop();
         ServerManager.reconnectWifi();
     }
 }

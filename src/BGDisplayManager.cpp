@@ -95,7 +95,11 @@ void BGDisplayManager_::maybeRrefreshScreen(bool force) {
                 bool dataIsOld = displayedReadings.back().getSecondsAgo() >
                                  60 * SettingsManager.settings.bg_data_too_old_threshold_minutes;
                 DisplayManager.clearMatrix(false);
-                currentFace->showReadings(displayedReadings, dataIsOld);
+                if (dataIsOld) {
+                    currentFace->showNoData();
+                } else {
+                    currentFace->showReadings(displayedReadings, dataIsOld);
+                }
                 DisplayManager.update();
             } else {
                 DisplayManager.clearMatrix(false);
@@ -109,8 +113,14 @@ void BGDisplayManager_::maybeRrefreshScreen(bool force) {
 void BGDisplayManager_::showData(std::list<GlucoseReading> glucoseReadings) {
     if (glucoseReadings.size() == 0) {
         if (displayedReadings.size() > 0) {
+            bool dataIsOld = displayedReadings.back().getSecondsAgo() >
+                             60 * SettingsManager.settings.bg_data_too_old_threshold_minutes;
             DisplayManager.clearMatrix(false);
-            currentFace->showReadings(displayedReadings, true);
+            if (dataIsOld) {
+                currentFace->showNoData();
+            } else {
+                currentFace->showReadings(displayedReadings, true);
+            }
             DisplayManager.update();
         } else {
             DisplayManager.clearMatrix(false);

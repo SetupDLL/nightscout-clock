@@ -240,8 +240,23 @@ IPAddress ServerManager_::startWifi() {
 
 // When we cannot get BG for some time, we want to reconnect to wifi
 void ServerManager_::reconnectWifi() {
+    static unsigned long lastReconnectAttemptMillis = 0;
+    const unsigned long reconnectCooldownMillis = 30000;
+
+    if (millis() - lastReconnectAttemptMillis < reconnectCooldownMillis) {
+        DEBUG_PRINTLN("Skipping WiFi reconnect (cooldown)");
+        return;
+    }
+    lastReconnectAttemptMillis = millis();
+
+    if (WiFi.status() == WL_CONNECTED) {
+        DEBUG_PRINTLN("Skipping WiFi reconnect (already connected)");
+        failedAttempts = 0;
+        return;
+    }
+
     DEBUG_PRINTLN("Reconnecting to WiFi...");
-    WiFi.disconnect();
+    WiFi.disconnect(true, true);
     delay(1000);
     myIP = startWifi();
     failedAttempts = 0;
